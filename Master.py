@@ -106,13 +106,13 @@ class Master:
     rootcount = 0
     totalnodecount = 0
     #Only for root list
-    masterlock = threading.RLock()
+    masterlock = threading.Lock()
 
     def AddRoot(self, delay, bandwidth):
         self.masterlock.acquire()
         n = Root(delay, bandwidth, self.rootcount)
         self.id_to_root[self.rootcount] = n
-        self.rootlocklist.append(threading.RLock())
+        self.rootlocklist.append(threading.Lock())
         self.rootlist.append(n)
         #print self.rootlist
         self.rootcount += 1
